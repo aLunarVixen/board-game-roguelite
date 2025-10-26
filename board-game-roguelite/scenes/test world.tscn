@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhjkxlehk1rwg"]
+
+[ext_resource type="PackedScene" uid="uid://dldd4rymjqatn" path="res://scenes/player_token.tscn" id="1_8morl"]
+[ext_resource type="PackedScene" uid="uid://c0g5rf1rtg43n" path="res://scenes/board_pieces.tscn" id="2_37a44"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fwv4n"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_ecdxs"]
+sky_material = SubResource("ProceduralSkyMaterial_fwv4n")
+
+[sub_resource type="Environment" id="Environment_mkatv"]
+background_mode = 2
+sky = SubResource("Sky_ecdxs")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mkatv")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 0.294
+shadow_enabled = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-3.09086e-08, -0.707107, 0.707107, -3.09086e-08, 0.707107, 0.707107, -1, 2.4869e-14, -4.37114e-08, 12, 9, -10)
+
+[node name="player token" parent="." instance=ExtResource("1_8morl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.206866, 0)
+
+[node name="board" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="board pieces" parent="board" instance=ExtResource("2_37a44")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="board pieces3" parent="board" instance=ExtResource("2_37a44")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, -3.4)
+
+[node name="board pieces4" parent="board" instance=ExtResource("2_37a44")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, 3.4)
+
+[node name="board pieces" parent="." instance=ExtResource("2_37a44")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)

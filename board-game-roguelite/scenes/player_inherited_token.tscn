@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ny754oxb6btd"]
+
+[ext_resource type="PackedScene" uid="uid://bmtbmd8hr0hhp" path="res://models/player peices/animated player token.blend" id="1_gahtu"]
+
+[node name="animated player token" instance=ExtResource("1_gahtu")]
+
+[node name="AnimationPlayer" parent="." index="2"]
+autoplay = "CubeAction"

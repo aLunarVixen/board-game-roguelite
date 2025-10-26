@@ -1,0 +1,96 @@
+[gd_scene load_steps=13 format=3 uid="uid://c0g5rf1rtg43n"]
+
+[ext_resource type="PackedScene" uid="uid://cp5k3paevlkx8" path="res://models/board pieces/board piece attack select.blend" id="1_rxnqd"]
+[ext_resource type="Script" path="res://scripts/board_pieces.gd" id="1_yuth7"]
+[ext_resource type="PackedScene" uid="uid://dlt0er5tffvn3" path="res://models/board pieces/board piece attack.blend" id="2_dgqy6"]
+[ext_resource type="PackedScene" uid="uid://bq1s3cou1m22j" path="res://models/board pieces/board piece move select.blend" id="3_0a2r5"]
+[ext_resource type="PackedScene" uid="uid://nbmun4qi62hy" path="res://models/board pieces/board piece ranged attack.blend" id="4_a4q2m"]
+[ext_resource type="PackedScene" uid="uid://d4mxpnwnwaghm" path="res://models/board pieces/board piece ranged select.blend" id="5_dpj2v"]
+[ext_resource type="PackedScene" uid="uid://c5ariri6n8wft" path="res://models/board pieces/board piece.blend" id="6_w3t3x"]
+
+[sub_resource type="Animation" id="Animation_0heln"]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("piece types:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(3.36359, 1),
+"update": 0,
+"values": [Vector3(0, 0.3, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_eyast"]
+resource_name = "activate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("piece types:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.466517, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.3, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e6ncl"]
+_data = {
+"RESET": SubResource("Animation_0heln"),
+"activate": SubResource("Animation_eyast")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6e872"]
+height = 0.415
+radius = 1.495
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_omo0x"]
+
+[node name="board pieces" type="Node3D"]
+script = ExtResource("1_yuth7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e6ncl")
+}
+
+[node name="piece types" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="board piece attack select" parent="piece types" instance=ExtResource("1_rxnqd")]
+visible = false
+
+[node name="board piece attack" parent="piece types" instance=ExtResource("2_dgqy6")]
+visible = false
+
+[node name="board piece move select" parent="piece types" instance=ExtResource("3_0a2r5")]
+visible = false
+
+[node name="board piece ranged attack" parent="piece types" instance=ExtResource("4_a4q2m")]
+visible = false
+
+[node name="board piece ranged select" parent="piece types" instance=ExtResource("5_dpj2v")]
+visible = false
+
+[node name="board piece" parent="piece types" instance=ExtResource("6_w3t3x")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CylinderShape3D_6e872")
+
+[node name="Area3D2" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.778, 0)
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D2"]
+shape = SubResource("BoxShape3D_omo0x")
